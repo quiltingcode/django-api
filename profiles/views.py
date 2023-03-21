@@ -4,6 +4,7 @@ from rest_framework import status
 from .models import Profile
 from .serializers import ProfileSerializer
 from django.http import Http404
+from drf_api.permissions import isOwnerOrReadOnly
 
 
 class ProfileList(APIView):
@@ -15,10 +16,12 @@ class ProfileList(APIView):
 
 class ProfileDetail(APIView):
     serializer_class = ProfileSerializer
+    permission_classes = [isOwnerOrReadOnly]
 
     def get_object(self, pk):
         try:
             profile = Profile.objects.get(pk=pk)
+            self.check_object_permissions(self.request, profile)
             return profile
         except Profile.DoesNotExist:
             raise Http404
