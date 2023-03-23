@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from .models import Profile
 from .serializers import ProfileSerializer
 from drf_api.permissions import isOwnerOrReadOnly
