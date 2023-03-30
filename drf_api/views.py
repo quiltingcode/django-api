@@ -25,7 +25,7 @@ def logout_route(request):
         samesite=JWT_AUTH_SAMESITE,
         secure=JWT_AUTH_SECURE,
     )
-    response.set_cookies(
+    response.set_cookie(
         key=JWT_AUTH_REFRESH_COOKIE,
         value='',
         httponly=True,
